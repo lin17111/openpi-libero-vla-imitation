@@ -49,3 +49,12 @@ See [`results_summary/commands.md`](results_summary/commands.md) for reproducibl
 - ACT / Diffusion Policy baseline
 - Isaac Sim high-fidelity simulation
 - ROS/MoveIt action adapter for real robot deployment
+
+## Pipeline
+
+![Pipeline overview](figures/pipeline_overview.png)
+
+## Main Results
+
+![Success rate comparison](figures/success_rate_comparison.png)
+
