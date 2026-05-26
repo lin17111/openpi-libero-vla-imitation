@@ -1,3 +1,7 @@
-# Docs
+# Documentation Index
 
-Supporting notes, figures, and future writeups can live here.
+- [Method](method.md)
+- [Results](results.md)
+- [Limitations](limitations.md)
+- [Visualization Plan](visualization_plan.md)
+
