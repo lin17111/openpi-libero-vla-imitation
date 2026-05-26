@@ -1,0 +1,13 @@
+*.npy
+*.pt
+*.pth
+*.ckpt
+*.log
+results/libero_dataset*/
+checkpoints/
+.cache/
+__pycache__/
+*.pyc
+.venv/
+wandb/
+runs/
