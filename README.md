@@ -4,27 +4,27 @@
 
 ## Overview
 
-This repository is a showcase of a small but complete imitation learning pipeline built on OpenPI, LIBERO, robosuite, and MuJoCo.
+This repository showcases a compact imitation learning pipeline built on OpenPI, LIBERO, robosuite, and MuJoCo.
 
-The project follows a teacher-student setup:
+The pipeline uses a teacher-student setup:
 
 - roll out a strong OpenPI teacher policy (`pi05_libero`)
-- collect trajectories from successful teacher episodes
+- collect successful trajectories
 - train two offline student baselines
 - evaluate both students in closed-loop LIBERO simulation
 
-This is a MuJoCo / LIBERO simulation project, not a real-robot deployment.
+This is a MuJoCo / LIBERO simulation project, not real-robot deployment.
 
 ## Why This Project
 
-The main question is practical:
+The main question is simple but practical:
 
-- If a student policy matches teacher actions offline, does it also work in closed loop?
+- if a student policy matches teacher actions offline, does it also work in closed loop?
 
-The answer in this pipeline is:
+This project shows that:
 
-- single-step behavior cloning can fit the teacher reasonably well offline, but still fail in rollout due to compounding error;
-- predicting short action chunks improves temporal consistency and gives much better closed-loop behavior.
+- single-step behavior cloning can fit the teacher well offline, but still fail during rollout because of compounding error;
+- action-chunk behavior cloning gives the student a short-horizon temporal structure and improves rollout robustness.
 
 ## Pipeline
 
@@ -46,15 +46,21 @@ The answer in this pipeline is:
 
 ## Figures
 
-![Pipeline overview](figures/pipeline_overview.png)
+<table>
+  <tr>
+    <td><img src="figures/pipeline_overview.png" alt="Pipeline overview" /></td>
+    <td><img src="figures/success_rate_comparison.png" alt="Success rate comparison" /></td>
+  </tr>
+  <tr>
+    <td><img src="figures/student_comparison.png" alt="Student comparison" /></td>
+    <td><img src="figures/error_accumulation_concept.png" alt="Error accumulation concept" /></td>
+  </tr>
+  <tr>
+    <td colspan="2"><img src="figures/training_loss_curves.png" alt="Training loss curves" /></td>
+  </tr>
+</table>
 
-![Success rate comparison](figures/success_rate_comparison.png)
-
-![Student comparison](figures/student_comparison.png)
-
-![Error accumulation concept](figures/error_accumulation_concept.png)
-
-![Training loss curves](figures/training_loss_curves.png)
+Rollout visualizations will be added later.
 
 ## Repository Structure
 
@@ -71,7 +77,7 @@ openpi-libero-vla-imitation/
 
 ## How to Reproduce
 
-The showcase is intentionally lightweight. The key commands are:
+The showcase is intentionally lightweight. The core commands are:
 
 ### Teacher rollout
 
@@ -126,10 +132,8 @@ python make_figures.py
 
 - Teacher π0.5 achieves strong success on `libero_spatial`.
 - Single-step student BC can match teacher actions offline but fails in closed-loop rollout.
-- Action-chunk BC keeps a short-horizon temporal structure and improves control stability.
+- Action-chunk BC preserves short-horizon temporal consistency and improves control stability.
 - Offline MSE alone is not sufficient to judge closed-loop policy quality.
-
-Rollout visualizations will be added later.
 
 ## Troubleshooting
 
@@ -164,3 +168,4 @@ Rollout visualizations will be added later.
 - [results_summary/experiment_summary.md](results_summary/experiment_summary.md)
 - [results_summary/result_table.md](results_summary/result_table.md)
 - [results_summary/commands.md](results_summary/commands.md)
+
