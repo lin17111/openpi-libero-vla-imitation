@@ -62,6 +62,61 @@ This project shows that:
 
 Rollout visualizations will be added later.
 
+## Offline Action Adapter
+
+This module extends the earlier LIBERO action space audit with an offline action bridge that operates only on already-saved `actions.npy` files. It does not re-run LIBERO or step any environment.
+
+Because this project uses `robosuite.controllers.osc.OperationalSpaceController` inside the LIBERO wrapper chain, the 7D action is interpreted as:
+
+- `action[0:6]`: 6D end-effector motion command in operational space
+- `action[6]`: gripper open/close command
+
+The adapter applies motion safety processing on the first six dimensions, including clip, exponential smoothing, and jump limiting. The gripper dimension is handled separately with clamp-to-`[-1, 1]` and optional thresholding.
+
+Example:
+
+```bash
+python scripts/demo_action_adapter.py \
+  --actions_file results/libero_dataset_500/task5_ep30/actions.npy \
+  --mode clip_and_smooth \
+  --max_norm 1.5 \
+  --max_jump 0.5 \
+  --smooth_alpha 0.7 \
+  --threshold_gripper
+```
+
+Outputs are written to:
+
+- `results_summary/action_adapter_demo/`
+- `figures/action_bridge/adapter_*.png`
+
+Limitation: this is an offline action bridge demo only. It does not mean the adapted actions have been re-executed online. The next step is to connect the same adapter to `env.step()` or a real-robot SDK.
+
+## VLA Action Bridge & Safety Layer
+
+In addition to teacher/student imitation learning, this repository also includes an offline action bridge and safety layer for the LIBERO trajectories.
+
+- Based on 488 successful LIBERO trajectories and 50,713 executed actions
+- Confirms the 7D LIBERO action semantics: 6D motion + 1D gripper command
+- Covers action space audit, offline action adapter, and offline safety filter
+- Details: [results_summary/action_bridge_summary.md](results_summary/action_bridge_summary.md)
+
+![Action dimension distribution](figures/action_bridge/action_dim_distribution.png)
+
+![Action jump histogram](figures/action_bridge/action_jump_hist.png)
+
+![Safety trigger count](figures/action_bridge/safety_trigger_count.png)
+
+The adapter demo now includes real dataset-based comparison figures:
+
+![Adapter raw vs adapted](figures/action_bridge/adapter_raw_vs_adapted.png)
+
+![Adapter action jump before after](figures/action_bridge/adapter_action_jump_before_after.png)
+
+![Adapter action norm before after](figures/action_bridge/adapter_action_norm_before_after.png)
+
+![Adapter gripper compare](figures/action_bridge/adapter_gripper_compare.png)
+
 ## Repository Structure
 
 ```text
@@ -168,4 +223,3 @@ python make_figures.py
 - [results_summary/experiment_summary.md](results_summary/experiment_summary.md)
 - [results_summary/result_table.md](results_summary/result_table.md)
 - [results_summary/commands.md](results_summary/commands.md)
-

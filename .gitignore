@@ -11,3 +11,8 @@ __pycache__/
 .venv/
 wandb/
 runs/
+*.npz
+results/libero_dataset_500/
+results_summary/**/adapted_actions.npy
+results_summary/**/safe_actions.npy
+results_summary/**/raw_actions.npy
