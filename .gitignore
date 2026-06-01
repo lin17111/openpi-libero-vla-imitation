@@ -16,3 +16,6 @@ results/libero_dataset_500/
 results_summary/**/adapted_actions.npy
 results_summary/**/safe_actions.npy
 results_summary/**/raw_actions.npy
+results_summary/action_adapter_demo/adapted/
+results_summary/safety_filter_demo/safety_info.json
+results_summary/safety_filter_demo/safety_metrics.json
