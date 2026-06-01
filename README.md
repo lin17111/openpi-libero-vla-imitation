@@ -46,17 +46,59 @@ This project shows that:
 
 ## Figures
 
+### Main Results
+
 <table>
   <tr>
-    <td><img src="figures/pipeline_overview.png" alt="Pipeline overview" /></td>
-    <td><img src="figures/success_rate_comparison.png" alt="Success rate comparison" /></td>
+    <td align="center" width="50%">
+      <img src="figures/pipeline_overview.png" width="100%" alt="Pipeline overview" /><br/>
+      <sub>Teacher rollout → trajectory collection → student imitation → closed-loop evaluation</sub>
+    </td>
+    <td align="center" width="50%">
+      <img src="figures/success_rate_comparison.png" width="100%" alt="Success rate comparison" /><br/>
+      <sub>Teacher π0.5 vs. student closed-loop success rates</sub>
+    </td>
   </tr>
+</table>
+
+### Student Fit vs Rollout
+
+<table>
   <tr>
-    <td><img src="figures/student_comparison.png" alt="Student comparison" /></td>
-    <td><img src="figures/error_accumulation_concept.png" alt="Error accumulation concept" /></td>
+    <td align="center" width="50%">
+      <img src="figures/student_comparison.png" width="100%" alt="Student comparison" /><br/>
+      <sub>Similar offline loss, very different rollout success</sub>
+    </td>
+    <td align="center" width="50%">
+      <img src="figures/error_accumulation_concept.png" width="100%" alt="Error accumulation concept" /><br/>
+      <sub>Chunk-level consistency reduces compounding error</sub>
+    </td>
   </tr>
+</table>
+
+### Training Curves
+
+<p align="center">
+  <img src="figures/training_loss_curves.png" width="920" alt="Training loss curves" />
+</p>
+<p align="center"><sub>Offline regression converges smoothly, but rollout behavior is still the decisive test.</sub></p>
+
+### Action Bridge & Safety Layer
+
+<table>
   <tr>
-    <td colspan="2"><img src="figures/training_loss_curves.png" alt="Training loss curves" /></td>
+    <td align="center" width="33%">
+      <img src="figures/action_bridge/action_dim_distribution.png" width="100%" alt="Action dimension distribution" /><br/>
+      <sub>Action space audit</sub>
+    </td>
+    <td align="center" width="33%">
+      <img src="figures/action_bridge/adapter_action_jump_before_after.png" width="100%" alt="Adapter jump comparison" /><br/>
+      <sub>Adapter jump reduction</sub>
+    </td>
+    <td align="center" width="33%">
+      <img src="figures/action_bridge/safety_trigger_count.png" width="100%" alt="Safety trigger count" /><br/>
+      <sub>Safety trigger reasons</sub>
+    </td>
   </tr>
 </table>
 
@@ -100,22 +142,7 @@ In addition to teacher/student imitation learning, this repository also includes
 - Confirms the 7D LIBERO action semantics: 6D motion + 1D gripper command
 - Covers action space audit, offline action adapter, and offline safety filter
 - Details: [results_summary/action_bridge_summary.md](results_summary/action_bridge_summary.md)
-
-![Action dimension distribution](figures/action_bridge/action_dim_distribution.png)
-
-![Action jump histogram](figures/action_bridge/action_jump_hist.png)
-
-![Safety trigger count](figures/action_bridge/safety_trigger_count.png)
-
-The adapter demo now includes real dataset-based comparison figures:
-
-![Adapter raw vs adapted](figures/action_bridge/adapter_raw_vs_adapted.png)
-
-![Adapter action jump before after](figures/action_bridge/adapter_action_jump_before_after.png)
-
-![Adapter action norm before after](figures/action_bridge/adapter_action_norm_before_after.png)
-
-![Adapter gripper compare](figures/action_bridge/adapter_gripper_compare.png)
+- The main visual summaries are shown in the figure gallery above to keep the README compact and readable.
 
 ## Repository Structure
 
